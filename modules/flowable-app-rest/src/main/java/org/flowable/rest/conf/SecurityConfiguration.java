@@ -30,7 +30,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    
+
     protected final RestAppProperties restAppProperties;
 
     public SecurityConfiguration(RestAppProperties restAppProperties) {
@@ -43,14 +43,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         basicAuthenticationProvider.setVerifyRestApiPrivilege(isVerifyRestApiPrivilege());
         return basicAuthenticationProvider;
     }
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         HttpSecurity httpSecurity = http.authenticationProvider(authenticationProvider())
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .csrf().disable();
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().csrf().disable();
 
         if (restAppProperties.getCors().isEnabled()) {
             httpSecurity.apply(new PropertyBasedCorsFilter(restAppProperties));
@@ -58,37 +56,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Swagger docs
         if (isSwaggerDocsEnabled()) {
-            httpSecurity
-                .authorizeRequests()
-                .antMatchers("/docs/**").permitAll();
-
+            httpSecurity.authorizeRequests().antMatchers("/docs/**").permitAll();
         } else {
-            httpSecurity
-                .authorizeRequests()
-                .antMatchers("/docs/**").denyAll();
-            
+            httpSecurity.authorizeRequests().antMatchers("/docs/**").denyAll();
         }
 
         httpSecurity
             .authorizeRequests()
-            .requestMatchers(EndpointRequest.to(InfoEndpoint.class, HealthEndpoint.class)).authenticated()
+            .requestMatchers(EndpointRequest.to(InfoEndpoint.class, HealthEndpoint.class)).permitAll()
             .requestMatchers(EndpointRequest.toAnyEndpoint()).hasAnyAuthority(SecurityConstants.ACCESS_ADMIN);
 
-        // Rest API access
         if (isVerifyRestApiPrivilege()) {
-            httpSecurity
-                .authorizeRequests()
-                .anyRequest()
-                .hasAuthority(SecurityConstants.PRIVILEGE_ACCESS_REST_API).and ().httpBasic();
-            
+            httpSecurity.authorizeRequests().anyRequest().hasAuthority(SecurityConstants.PRIVILEGE_ACCESS_REST_API)
+                    .and().httpBasic();
         } else {
-            httpSecurity
-            .authorizeRequests()
-            .anyRequest()
-            .authenticated().and().httpBasic();
+            httpSecurity.authorizeRequests().anyRequest().authenticated()
+                    .and().httpBasic();
         }
     }
-    
+
     protected boolean isVerifyRestApiPrivilege() {
         String authMode = restAppProperties.getAuthenticationMode();
         if (StringUtils.isNotEmpty(authMode)) {
@@ -96,7 +82,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         }
         return true; // checking privilege is the default
     }
-    
+
     protected boolean isSwaggerDocsEnabled() {
         return restAppProperties.isSwaggerDocsEnabled();
     }
