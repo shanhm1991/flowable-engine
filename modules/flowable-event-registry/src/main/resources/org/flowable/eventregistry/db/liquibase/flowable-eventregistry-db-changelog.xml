@@ -14,7 +14,7 @@
             <column name="CATEGORY_" type="varchar(255)">
             	<constraints nullable="true" />
             </column>
-            <column name="DEPLOY_TIME_" type="datetime(3)">
+            <column name="DEPLOY_TIME_" type="timestamp(3)">
                 <constraints nullable="true" />
             </column>
             <column name="TENANT_ID_" type="varchar(255)">
@@ -24,7 +24,7 @@
             	<constraints nullable="true" />
             </column>
         </createTable>
-        
+
         <createTable tableName="FLW_EVENT_RESOURCE">
             <column name="ID_" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false" />
@@ -35,7 +35,7 @@
                 <constraints nullable="true" />
             </column>
         </createTable>
-        
+
         <createTable tableName="FLW_EVENT_DEFINITION">
             <column name="ID_" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false" />
@@ -55,13 +55,13 @@
             	<constraints nullable="true" />
             </column>
         </createTable>
-        
+
         <createIndex tableName="FLW_EVENT_DEFINITION" indexName="ACT_IDX_EVENT_DEF_UNIQ" unique="true">
             <column name="KEY_" />
             <column name="VERSION_" />
             <column name="TENANT_ID_" />
         </createIndex>
-        
+
         <createTable tableName="FLW_CHANNEL_DEFINITION">
             <column name="ID_" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false" />
@@ -73,7 +73,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="DEPLOYMENT_ID_" type="varchar(255)" />
-            <column name="CREATE_TIME_" type="datetime(3)">
+            <column name="CREATE_TIME_" type="timestamp(3)">
                 <constraints nullable="true" />
             </column>
             <column name="TENANT_ID_" type="varchar(255)">
@@ -84,7 +84,7 @@
                 <constraints nullable="true" />
             </column>
         </createTable>
-        
+
         <createIndex tableName="FLW_CHANNEL_DEFINITION" indexName="ACT_IDX_CHANNEL_DEF_UNIQ" unique="true">
             <column name="KEY_" />
             <column name="VERSION_" />
@@ -101,7 +101,7 @@
             <column name="IMPLEMENTATION_" type="varchar(255)"/>
         </addColumn>
     </changeSet>
-    
+
     <changeSet id="3" author="flowable">
         <customChange class="org.flowable.eventregistry.impl.db.SetChannelDefinitionTypeAndImplementationCustomChange" />
     </changeSet>

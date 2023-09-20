@@ -123,7 +123,8 @@ public abstract class LiquibaseBasedSchemaManager implements SchemaManager {
     public String schemaUpdate() {
         Liquibase liquibase = null;
         try {
-            liquibase = createLiquibaseInstance(getDatabaseConfiguration());
+            LiquibaseDatabaseConfiguration liquibaseConfiguration = getDatabaseConfiguration();
+            liquibase = createLiquibaseInstance(liquibaseConfiguration);
             liquibase.update(context);
         } catch (Exception e) {
             throw new FlowableException("Error updating " + context + " engine tables", e);

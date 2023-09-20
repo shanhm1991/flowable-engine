@@ -322,6 +322,20 @@
     </properties>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -366,7 +380,7 @@
         </plugins>
         <pluginManagement>
             <plugins>
-                <!--This plugin's configuration is used to store Eclipse 
+                <!--This plugin's configuration is used to store Eclipse
                     m2e settings only. It has no influence on the Maven build itself. -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
@@ -489,7 +503,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <!-- only worked with this version, there might be 
+                        <!-- only worked with this version, there might be
                             a bug with antrun see http://jira.codehaus.org/browse/MANTRUN-109 -->
                         <version>1.4</version>
                         <executions>
@@ -546,7 +560,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <!-- only worked with this version, there might be 
+                        <!-- only worked with this version, there might be
                             a bug with antrun see http://jira.codehaus.org/browse/MANTRUN-109 -->
                         <version>1.4</version>
                         <executions>
@@ -603,7 +617,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <!-- only worked with this version, there might be 
+                        <!-- only worked with this version, there might be
                             a bug with antrun see http://jira.codehaus.org/browse/MANTRUN-109 -->
                         <version>1.4</version>
                         <executions>
@@ -666,7 +680,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        
+
                         <version>1.4</version>
                         <executions>
                             <execution>
@@ -728,7 +742,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <!-- only worked with this version, there might be 
+                        <!-- only worked with this version, there might be
                             a bug with antrun see http://jira.codehaus.org/browse/MANTRUN-109 -->
                         <version>1.4</version>
                         <executions>
@@ -791,7 +805,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <!-- only worked with this version, there might be 
+                        <!-- only worked with this version, there might be
                             a bug with antrun see http://jira.codehaus.org/browse/MANTRUN-109 -->
                         <version>1.4</version>
                         <executions>
@@ -828,7 +842,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <!-- only worked with this version, there might be 
+                        <!-- only worked with this version, there might be
                             a bug with antrun see http://jira.codehaus.org/browse/MANTRUN-109 -->
                         <version>1.4</version>
                         <executions>
@@ -875,7 +889,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/*TestCase.java</exclude>
-                                <!-- Disabling tests that run exclusively 
+                                <!-- Disabling tests that run exclusively
                                     using standalone config -->
                                 <exclude>**/ProcessDiagramRetrievalTest.java</exclude>
                                 <exclude>org/flowable/standalone/**</exclude>
@@ -900,7 +914,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <!-- only worked with this version, there might be 
+                        <!-- only worked with this version, there might be
                             a bug with antrun see http://jira.codehaus.org/browse/MANTRUN-109 -->
                         <version>1.4</version>
                         <executions>
@@ -949,7 +963,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/*TestCase.java</exclude>
-                                <!-- Disabling tests that run exclusively 
+                                <!-- Disabling tests that run exclusively
                                     using standalone config -->
                                 <exclude>**/ProcessDiagramRetrievalTest.java</exclude>
                                 <exclude>org/flowable/standalone/**</exclude>
@@ -1023,7 +1037,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <!-- only worked with this version, there might be 
+                        <!-- only worked with this version, there might be
                             a bug with antrun see http://jira.codehaus.org/browse/MANTRUN-109 -->
                         <version>1.4</version>
                         <executions>
@@ -1095,7 +1109,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <!-- only worked with this version, there might be 
+                        <!-- only worked with this version, there might be
                             a bug with antrun see http://jira.codehaus.org/browse/MANTRUN-109 -->
                         <version>1.4</version>
                         <executions>
@@ -1590,7 +1604,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <!-- only worked with this version, there might be 
+                        <!-- only worked with this version, there might be
                             a bug with antrun see http://jira.codehaus.org/browse/MANTRUN-109 -->
                         <version>1.4</version>
                         <executions>
@@ -1616,7 +1630,7 @@
                 </plugins>
             </build>
         </profile>
-        
+
         <profile>
             <id>mongodb</id>
             <dependencies>

@@ -14,7 +14,7 @@
             <column name="CATEGORY_" type="varchar(255)">
             	<constraints nullable="true" />
             </column>
-            <column name="DEPLOY_TIME_" type="datetime">
+            <column name="DEPLOY_TIME_" type="timestamp">
                 <constraints nullable="true" />
             </column>
             <column name="TENANT_ID_" type="varchar(255)">
@@ -24,7 +24,7 @@
             	<constraints nullable="true" />
             </column>
         </createTable>
-        
+
         <createTable tableName="ACT_FO_FORM_RESOURCE">
             <column name="ID_" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false" />
@@ -35,7 +35,7 @@
                 <constraints nullable="true" />
             </column>
         </createTable>
-        
+
         <createTable tableName="ACT_FO_FORM_DEFINITION">
             <column name="ID_" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false" />
@@ -58,7 +58,7 @@
             	<constraints nullable="true" />
             </column>
         </createTable>
-        
+
         <createTable tableName="ACT_FO_FORM_INSTANCE">
             <column name="ID_" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false" />
@@ -75,7 +75,7 @@
             <column name="PROC_DEF_ID_" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="SUBMITTED_DATE_" type="datetime" />
+            <column name="SUBMITTED_DATE_" type="timestamp" />
             <column name="SUBMITTED_BY_" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -90,25 +90,25 @@
     </changeSet>
 
     <changeSet id="2" author="flowable">
-    
+
         <addColumn tableName="ACT_FO_FORM_INSTANCE">
             <column name="SCOPE_ID_" type="varchar(255)" />
             <column name="SCOPE_TYPE_" type="varchar(255)" />
             <column name="SCOPE_DEFINITION_ID_" type="varchar(255)" />
         </addColumn>
-    
+
     </changeSet>
-    
+
     <changeSet id="3" author="flowable">
-    
+
         <dropColumn columnName="PARENT_DEPLOYMENT_ID_" tableName="ACT_FO_FORM_DEFINITION" />
-        
+
     </changeSet>
 
     <changeSet id="4" author="flowable" dbms="mysql,mariadb">
 
-        <modifyDataType tableName="ACT_FO_FORM_DEPLOYMENT" columnName="DEPLOY_TIME_" newDataType="datetime(3)" />
-        <modifyDataType tableName="ACT_FO_FORM_INSTANCE" columnName="SUBMITTED_DATE_" newDataType="datetime(3)" />
+        <modifyDataType tableName="ACT_FO_FORM_DEPLOYMENT" columnName="DEPLOY_TIME_" newDataType="timestamp(3)" />
+        <modifyDataType tableName="ACT_FO_FORM_INSTANCE" columnName="SUBMITTED_DATE_" newDataType="timestamp(3)" />
 
     </changeSet>
 

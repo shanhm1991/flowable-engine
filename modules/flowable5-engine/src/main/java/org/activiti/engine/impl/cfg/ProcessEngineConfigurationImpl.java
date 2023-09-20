@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -770,8 +770,11 @@ public abstract class ProcessEngineConfigurationImpl extends ProcessEngineConfig
     public static final String DATABASE_TYPE_MSSQL = "mssql";
     public static final String DATABASE_TYPE_DB2 = "db2";
 
+    public static final String DATABASE_TYPE_OSCAR = "oscar";
+
     protected static Properties getDefaultDatabaseTypeMappings() {
         Properties databaseTypeMappings = new Properties();
+        databaseTypeMappings.setProperty("OSCAR", DATABASE_TYPE_OSCAR);
         databaseTypeMappings.setProperty("H2", DATABASE_TYPE_H2);
         databaseTypeMappings.setProperty("HSQL Database Engine", DATABASE_TYPE_HSQL);
         databaseTypeMappings.setProperty("MySQL", DATABASE_TYPE_MYSQL);
@@ -1183,7 +1186,7 @@ public abstract class ProcessEngineConfigurationImpl extends ProcessEngineConfig
         defaultDeployers.add(bpmnDeployer);
         return defaultDeployers;
     }
-    
+
     public void initWsdlImporterFactory() {
         if (wsWsdlImporterFactory == null) {
             DefaultXMLImporterFactory defaultListenerFactory = new DefaultXMLImporterFactory();
@@ -1307,7 +1310,7 @@ public abstract class ProcessEngineConfigurationImpl extends ProcessEngineConfig
 
         TimerActivateProcessDefinitionHandler activateProcessDefinitionHandler = new TimerActivateProcessDefinitionHandler();
         jobHandlers.put(activateProcessDefinitionHandler.getType(), activateProcessDefinitionHandler);
-        
+
         ExternalWorkerTaskCompleteJobHandler externalWorkerTaskCompleteJobHandler = new ExternalWorkerTaskCompleteJobHandler();
         jobHandlers.put(externalWorkerTaskCompleteJobHandler.getType(), externalWorkerTaskCompleteJobHandler);
 
@@ -2207,7 +2210,7 @@ public abstract class ProcessEngineConfigurationImpl extends ProcessEngineConfig
     public void setProcessValidator(ProcessValidator processValidator) {
         this.processValidator = processValidator;
     }
-    
+
     public XMLImporterFactory getWsdlImporterFactory() {
         return wsWsdlImporterFactory;
     }

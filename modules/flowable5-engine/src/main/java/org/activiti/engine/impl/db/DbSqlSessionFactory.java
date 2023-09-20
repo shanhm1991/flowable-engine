@@ -1,9 +1,9 @@
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -141,6 +141,48 @@ public class DbSqlSessionFactory implements SessionFactory {
         addDatabaseSpecificStatement("oracle", "bulkInsertTimerJob", "bulkInsertTimerJob_oracle");
         addDatabaseSpecificStatement("oracle", "bulkInsertSuspendedJob", "bulkInsertSuspendedJob_oracle");
         addDatabaseSpecificStatement("oracle", "bulkInsertDeadLetterJob", "bulkInsertDeadLetterJob_oracle");
+
+        // OSCAR
+        databaseSpecificLimitBeforeStatements.put("oscar", "select * from ( select a.*, ROWNUM rnum from (");
+        databaseSpecificLimitAfterStatements.put("oscar", "  ) a where ROWNUM < #{lastRow}) where rnum  >= #{firstRow}");
+        databaseSpecificLimitBetweenStatements.put("oscar", "");
+        databaseOuterJoinLimitBetweenStatements.put("oscar", "");
+        databaseSpecificOrderByStatements.put("oscar", defaultOrderBy);
+        addDatabaseSpecificStatement("oscar", "selectExclusiveJobsToExecute", "selectExclusiveJobsToExecute_integerBoolean");
+        addDatabaseSpecificStatement("oscar", "selectUnlockedTimersByDuedate", "selectUnlockedTimersByDuedate_oracle");
+        addDatabaseSpecificStatement("oscar", "insertEventLogEntry", "insertEventLogEntry_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertVariableInstance", "bulkInsertVariableInstance_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertTask", "bulkInsertTask_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertResource", "bulkInsertResource_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertProperty", "bulkInsertProperty_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertProcessDefinition", "bulkInsertProcessDefinition_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertModel", "bulkInsertModel_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertTimer", "bulkInsertTimer_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertMessage", "bulkInsertMessage_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertIdentityLink", "bulkInsertIdentityLink_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertHistoricVariableInstance", "bulkInsertHistoricVariableInstance_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertHistoricTaskInstance", "bulkInsertHistoricTaskInstance_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertHistoricProcessInstance", "bulkInsertHistoricProcessInstance_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertHistoricIdentityLink", "bulkInsertHistoricIdentityLink_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertHistoricDetailVariableInstanceUpdate", "bulkInsertHistoricDetailVariableInstanceUpdate_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertHistoricFormProperty", "bulkInsertHistoricFormProperty_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertHistoricActivityInstance", "bulkInsertHistoricActivityInstance_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertExecution", "bulkInsertExecution_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertMessageEventSubscription", "bulkInsertMessageEventSubscription_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertSignalEventSubscription", "bulkInsertSignalEventSubscription_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertCompensateEventSubscription", "bulkInsertCompensateEventSubscription_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertEventLogEntry", "bulkInsertEventLogEntry_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertDeployment", "bulkInsertDeployment_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertComment", "bulkInsertComment_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertByteArray", "bulkInsertByteArray_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertEventLogEntry", "bulkInsertEventLogEntry_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertDeployment", "bulkInsertDeployment_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertComment", "bulkInsertComment_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertAttachment", "bulkInsertAttachment_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertJob", "bulkInsertJob_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertTimerJob", "bulkInsertTimerJob_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertSuspendedJob", "bulkInsertSuspendedJob_oracle");
+        addDatabaseSpecificStatement("oscar", "bulkInsertDeadLetterJob", "bulkInsertDeadLetterJob_oracle");
 
         // db2
         databaseSpecificLimitBeforeStatements.put("db2", "SELECT SUB.* FROM (");
@@ -308,7 +350,7 @@ public class DbSqlSessionFactory implements SessionFactory {
         }
 
         // Only Oracle is making a fuss in one specific case right now
-        if ("oracle".equals(databaseType)) {
+        if ("oracle".equals(databaseType) || "oscar".equals(databaseType)) {
             bulkInsertableMap.put(EventLogEntryEntity.class, Boolean.FALSE);
         }
     }
